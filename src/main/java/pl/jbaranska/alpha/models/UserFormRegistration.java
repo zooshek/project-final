@@ -18,7 +18,8 @@ public class UserFormRegistration {
     private String zip;
     private String phone;
 
-    public UserFormRegistration(){}
+    public UserFormRegistration() {
+    }
 
     public UserFormRegistration(String name, String surname, String email, String password, String street, String city, String zip, String phone) {
         this.name = name;

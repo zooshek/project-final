@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registation</title>
+</head>
+<body>
+<form action="#" th:method="post" th:action="@{/register}" th:object="${registerForm}">
+   Imię <input type="text" th:field="*{name}"/>
+   <br>
+   Nazwisko <input type="text" th:field="*{surname}"/>
+    <br>
+   Email <input type="text" th:field="*{email}"/>
+    <br>
+   Hasło <input type="text" th:field="*{password}"/>
+    <br>
+   Ulica <input type="text" th:field="*{street}"/>
+    <br>
+   Miasto <input type="text" th:field="*{city}"/>
+    <br>
+   Kod <input type="text" th:field="*{zip}"/>
+    <br>
+   Telefon <input type="text" th:field="*{phone}"/>
+    <br>
+    <input type="submit" value="Zarejestruj"/>
+</form>
+
+</body>
+</html>

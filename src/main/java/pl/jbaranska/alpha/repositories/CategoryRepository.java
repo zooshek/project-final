@@ -2,11 +2,11 @@ package pl.jbaranska.alpha.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.jbaranska.alpha.entity.Role;
+import pl.jbaranska.alpha.entity.Category;
 
 import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
-    Optional<Role> findByRole(String roleName);
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
+    Optional<Category> findByCategory(String categoryName);
 }

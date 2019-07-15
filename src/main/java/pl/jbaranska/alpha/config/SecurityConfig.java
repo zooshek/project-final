@@ -21,8 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
         this.dataSource = dataSource;
     }
+
     @Override
-    protected void configure(AuthenticationManagerBuilder authentication)throws Exception{
+    protected void configure(AuthenticationManagerBuilder authentication) throws Exception {
         authentication
                 .inMemoryAuthentication()
                 .withUser("test1")

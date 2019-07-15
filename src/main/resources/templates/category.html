@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorie</title>
+</head>
+<body>
+<h2>Dostępne kategorie</h2>
+
+<form action="#" th:method="post" th:action="@{/admin/categories}" th:object="${categoryForm}">
+    Nowa Kategoria <input type="text" th:field="*{categoryName}">
+    <input type="submit" value="Dodaj">
+</form>
+<ul th:each="category : ${categories}">
+    <li th:text="${category.getCategory()}"></li>
+</ul>
+
+</body>
+</html>

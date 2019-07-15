@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 import static javax.persistence.FetchType.EAGER;
 
 @ToString
@@ -51,7 +52,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
     private Set<Role> roles;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String name, String surname, String email, String password, String street, String city, String zip, String phone, Set<Role> roles) {
         this.name = name;
@@ -65,10 +67,4 @@ public class User {
         this.roles = roles;
     }
 
-    public void addRole(Role role){
-        if (roles == null) {
-            roles = new HashSet<>();
-        }
-        roles.add(role);
-    }
 }
