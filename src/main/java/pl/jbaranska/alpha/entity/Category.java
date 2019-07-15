@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +20,10 @@ public class Category {
 
     @Column(name = "CATEGORY_NAME")
     private String category;
+
+    @OneToMany
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")
+    private List<Product> productList;
 
     public Category(){};
 

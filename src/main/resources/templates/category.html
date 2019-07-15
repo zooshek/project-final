@@ -13,6 +13,7 @@
 </form>
 <ul th:each="category : ${categories}">
     <li th:text="${category.getCategory()}"></li>
+    <a th:href="@{/admin/categories/{id} (id=${category.id})}">Dodaj nowy product</a>
 </ul>
 
 </body>
