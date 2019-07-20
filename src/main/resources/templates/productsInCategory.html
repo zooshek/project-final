@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>Producty w kategorii <span th:text="${category.getCategory()}"></span></h2>
+<form action="#" th:method="post" th:action="@{/admin/products/{categoryId}}" th:object="${productForm}">
+
+    Nazwa produktu <input type="text" th:field="*{product}">
+    <br>
+    Rozmiar <input type="text" th:field="*{size}">
+    <br>
+    Cena <input type="text" th:field="*{price}">
+    <br>
+    <input type="hidden" name="categoryId" th:value="${category.getId()}">
+    <br>
+    <input type="submit" value="Dodaj">
+</form>
+<ul th:each="product : ${productsList}">
+    <li th:text="${product.getProduct()}"></li>
+    <li th:text="${product.getSize()}"></li>
+    <li th:text="${product.getPrice()}"></li>
+</ul>
+
+</body>
+</html>

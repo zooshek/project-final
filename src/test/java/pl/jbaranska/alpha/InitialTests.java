@@ -7,9 +7,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.jbaranska.alpha.entity.Category;
 import pl.jbaranska.alpha.entity.Role;
 import pl.jbaranska.alpha.entity.User;
 import pl.jbaranska.alpha.models.UserFormRegistration;
+import pl.jbaranska.alpha.repositories.CategoryRepository;
+import pl.jbaranska.alpha.repositories.ProductRepository;
 import pl.jbaranska.alpha.repositories.RoleRepository;
 import pl.jbaranska.alpha.repositories.UserRepository;
 import pl.jbaranska.alpha.services.RoleServices;
@@ -35,6 +38,13 @@ public class InitialTests {
     @Autowired
     RoleServices roleServices;
 
+    @Autowired
+    ProductRepository productRepository;
+
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @Test
     public void contextLoads() {
     }
@@ -50,6 +60,19 @@ public class InitialTests {
              role= roleRepository.save(new Role(ROLE_USER));
         }
         System.out.println(role);
+    }
+
+    @Test
+    public void selectPizza(){
+        Category categoryPizza = categoryRepository.findByCategory("Pizza").get();
+        System.out.println(
+                productRepository.findDistinctByCategoryId(categoryPizza.getId())
+        );
+    }
+    @Test
+    public void pricesForSize(String productName)
+    {
+
     }
 
 

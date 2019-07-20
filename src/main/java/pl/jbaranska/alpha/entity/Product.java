@@ -23,11 +23,17 @@ public class Product {
     @Column(name = "PRODUCT_SIZE")
     private String size;
 
-    @Column(name = "IS_CUSTOMIZE")
-    private boolean isCustomize;
-
     @Column(name = "CATEGORY_ID")
     private Integer categoryId;
 
+    @Column(name = "PRICE")
+    private Double price;
 
+    public Product(){}
+    public Product(String product, String size, Integer categoryId, Double price) {
+        this.product = product;
+        this.size = size;
+        this.categoryId = categoryId;
+        this.price = price;
+    }
 }

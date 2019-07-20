@@ -26,4 +26,8 @@ public class CategoryServices {
          categoryRepository.findByCategory(categoryForm.getCategoryName())
          .orElseGet(() -> categoryRepository.save(new Category(categoryForm.getCategoryName())));
     }
+    public Category  showCategory(Integer id)
+    {
+        return categoryRepository.getOne(id);
+    }
 }

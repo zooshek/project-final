@@ -5,9 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" th:action="@{/admin/users}" th:object="${userForm}">
+<h1>Wybierz pizzę</h1>
+<div>
+    <ul th:each="pizza : ${pizzaList}">
+      Pizza  <li th:text="${pizza.product}"></li>
+    </ul>
 
-</form>
-
+</div>
 </body>
 </html>
