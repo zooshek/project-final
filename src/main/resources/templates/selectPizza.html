@@ -7,10 +7,23 @@
 <body>
 <h1>Wybierz pizzę</h1>
 <div>
+    <form method="post" th:action="@{/order/pizza}" th:object="${pizzaForm}">
     <ul th:each="pizza : ${pizzaList}">
-      Pizza  <li th:text="${pizza.product}"></li>
-    </ul>
 
+        <label type="text" th:text="${pizza}"></label>
+        <span th:each="prod : ${pizzaDetails}">
+            <ul th:if="${prod.product}==${pizza}">
+
+                <label type="text" th:text="${prod.size} + ' - ' +${prod.price}+
+                ' zł Wybierz ilość '"></label>
+                <input type="number" th:field="*{quantity}"/>
+
+<!--                <input name="productId" type="hidden" th:field="*{productId}" th:value="${prod.id}">-->
+        </ul>
+        </span>
+    </ul>
+    <input type="submit" value="Zamów">
+    </form>
 </div>
 </body>
 </html>

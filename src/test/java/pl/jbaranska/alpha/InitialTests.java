@@ -63,17 +63,16 @@ public class InitialTests {
     }
 
     @Test
-    public void selectPizza(){
-        Category categoryPizza = categoryRepository.findByCategory("Pizza").get();
-        System.out.println(
-                productRepository.findDistinctByCategoryId(categoryPizza.getId())
-        );
-    }
-    @Test
-    public void pricesForSize(String productName)
+    public void selectPizza2()
     {
-
+        Category categoryPizza = categoryRepository.findByCategory("Pizza").get();
+        System.out.println(productRepository.selectDistinctName(categoryPizza.getId()));
     }
 
+    @Test
+    public void selectProductsByName()
+    {
+        System.out.println(productRepository.findProductsByProduct("Parma"));
+    }
 
 }

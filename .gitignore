@@ -4,7 +4,7 @@
 *.class
 
 #IntelliJ
-.idea
+.idea/
 
 # Log file
 *.log

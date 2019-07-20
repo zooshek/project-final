@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class ProductServices {
 
+    public static final String CATEGORY_PIZZA = "Pizza";
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
 
@@ -37,11 +38,30 @@ public class ProductServices {
             }
         }
     }
+
+    public List<String> getPizzaList(){
+
+        Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
+        return   productRepository.selectDistinctName(categoryPizza.getId());
+
+    }
+    public List<Product> showProductsInCategory(String categoryName){
+        Category category = categoryRepository.findByCategory(categoryName).get();
+        return productRepository.findProductsByCategoryId(category.getId());
+    }
     public List<Product> showAllProducts(){
         return productRepository.findAll();
     }
 
     public List<Product> showProductsInCategory(Integer categoryId){
         return productRepository.findProductsByCategoryId(categoryId);
+    }
+    public List<Product> showProductPizza(){
+        Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
+        return productRepository.findProductsByCategoryId(categoryPizza.getId());
+    }
+    public List<Product> getProductsByName(String productName)
+    {
+        return productRepository.findProductsByProduct(productName);
     }
 }

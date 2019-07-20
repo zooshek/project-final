@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class OrderServices {
-    public static final String CATEGORY_PIZZA = "Pizza";
+
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
 
@@ -19,10 +19,4 @@ public class OrderServices {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Product> getPizzaList(){
-
-        Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
-             return   productRepository.findDistinctByCategoryId(categoryPizza.getId());
-
-    }
 }
