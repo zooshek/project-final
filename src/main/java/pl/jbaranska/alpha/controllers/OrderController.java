@@ -11,6 +11,8 @@ import pl.jbaranska.alpha.models.ItemForm;
 import pl.jbaranska.alpha.services.OrderServices;
 import pl.jbaranska.alpha.services.ProductServices;
 
+import java.util.List;
+
 @RequestMapping("/order")
 @Controller
 public class OrderController {
@@ -24,11 +26,11 @@ public class OrderController {
 
     @GetMapping("/pizza")
     public String selectPizza(Model model){
-        model.addAttribute("pizzaDetails", productServices.showProductPizza());
-        model.addAttribute("pizzaList", productServices.getPizzaList());
+       // model.addAttribute("pizzaDetails", productServices.showProductPizza());
+     //   model.addAttribute("pizzaList", productServices.getPizzaList());
         PizzaForm pizzaForm = new PizzaForm();
-        productServices.showProductPizza().forEach(pp -> {
-            pizzaForm.getItems().add(new ItemForm(pp.getId(), 0, pp));
+        productServices.showProductPizza().forEach(pizza -> {
+            pizzaForm.getItems().add(new ItemForm(pizza.getId(), 0, pizza));
         });
         model.addAttribute("pizzaForm", pizzaForm);
         return "selectPizza";
@@ -36,7 +38,19 @@ public class OrderController {
 
     @PostMapping("/pizza")
     public String getSelectedPizza(@ModelAttribute("pizzaForm") PizzaForm pizzaForm, Model model){
-        System.out.println(pizzaForm);
-        return "selectPizza";
+        List<ItemForm> items = pizzaForm.getItems();
+        for (ItemForm item : items)
+        {
+            if (item.getQuantity()>0) {
+
+                item.getProductId();
+
+            }
+        }
+    //    productServices.showProductPizza().forEach(pizza -> {
+    //        pizzaForm.getItems().add(new ItemForm(pizza.getId(), 0, pizza));
+     //   });
+        model.addAttribute("pizzaForm", pizzaForm);
+        return "basket";
     }
 }

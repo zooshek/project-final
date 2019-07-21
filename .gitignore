@@ -35,3 +35,7 @@ out
 gen
 /application.properties
 /.idea/vcs.xml
+/src/main/java/pl/jbaranska/alpha/controllers/BookController.java
+/src/main/java/pl/jbaranska/alpha/models/Book.java
+/src/main/java/pl/jbaranska/alpha/services/BookService.java
+/src/main/resources/templates/allBooks.html

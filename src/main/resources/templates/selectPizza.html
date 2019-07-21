@@ -14,15 +14,8 @@
             <span th:text="${item.product.product}"></span>
             <span th:text="${item.product.size}"></span>
             <span th:text="${item.product.price}"></span>
-
-<!--            <input type="checkbox" th:name="|clientList[${stat.index}].clientID|"-->
-<!--                       th:value="${currentClient.getClientID()}" th:checked="${currentClient.selected}" />-->
-
             <input type="number" th:field="*{items[__${stat.index}__].quantity}" />
             <input type="hidden" th:field="*{items[__${stat.index}__].productId}" />
-
-<!--            <input type="number" name="quantity" th:value="${item.quantity}"/>-->
-<!--            <input type="hidden" name="productId" th:value="${item.productId}"/>-->
         </ul>
 
 <!--        <ul th:each="pizza : ${pizzaList}">-->

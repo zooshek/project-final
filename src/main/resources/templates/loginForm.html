@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="form-signin" method="post" th:action="@{/loginBySpring}">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+           autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
+    <br>
+    <p>
+        <a th:href="@{/register}">Zarejestruj</a>
+    </p>
+    <p class="mt-5 mb-3 text-muted">&copy; SDA PROJEKT</p>
+</form>
+</body>
+</html>

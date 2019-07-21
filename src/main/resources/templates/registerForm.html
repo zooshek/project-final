@@ -2,27 +2,37 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registation</title>
+    <title>Register</title>
 </head>
 <body>
-<form action="#" th:method="post" th:action="@{/register}" th:object="${registerForm}">
-   Imię <input type="text" th:field="*{name}"/>
-   <br>
-   Nazwisko <input type="text" th:field="*{surname}"/>
+
+<form method="post" th:action="@{/register}" th:object="${registerForm}">
+    Imię <input type="text" th:field="*{name}" th:errorClass="error">
+    <span th:errors="*{name}"></span>
     <br>
-   Email <input type="text" th:field="*{email}"/>
+    Nazwisko <input type="text" th:field="*{surname}" th:errorClass="error">
+    <span th:errors="*{surname}"></span>
     <br>
-   Hasło <input type="text" th:field="*{password}"/>
+    Email <input type="text" th:field="*{email}" th:errorClass="error">
+    <span th:errors="*{email}"></span>
     <br>
-   Ulica <input type="text" th:field="*{street}"/>
+    Hasło <input type="password" th:field="*{password}" th:errorClass="error">
+    <span th:errors="*{password}"></span>
     <br>
-   Miasto <input type="text" th:field="*{city}"/>
+    Ulica <input type="text" th:field="*{street}" th:errorClass="error">
+    <span th:errors="*{street}"></span>
     <br>
-   Kod <input type="text" th:field="*{zip}"/>
+    Miasto <input type="text" th:field="*{city}" th:errorClass="error">
+    <span th:errors="*{city}"></span>
     <br>
-   Telefon <input type="text" th:field="*{phone}"/>
+    Kod poctowy <input type="text" th:field="*{zip}" th:errorClass="error">
+    <span th:errors="*{zip}"></span>
     <br>
-    <input type="submit" value="Zarejestruj"/>
+    Telefon <input type="text" th:field="*{phone}" th:errorClass="error">
+    <span th:errors="*{phone}"></span>
+    <br>
+    <br>
+    <input type="submit" value="Zarejestruj">
 </form>
 
 </body>
