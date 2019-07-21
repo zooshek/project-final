@@ -8,21 +8,38 @@
 <h1>Wybierz pizzę</h1>
 <div>
     <form method="post" th:action="@{/order/pizza}" th:object="${pizzaForm}">
-    <ul th:each="pizza : ${pizzaList}">
 
-        <label type="text" th:text="${pizza}"></label>
-        <span th:each="prod : ${pizzaDetails}">
-            <ul th:if="${prod.product}==${pizza}">
+        <ul th:each="item, stat : ${pizzaForm.items}">
+            <span th:text="${item.product.id}"></span>
+            <span th:text="${item.product.product}"></span>
+            <span th:text="${item.product.size}"></span>
+            <span th:text="${item.product.price}"></span>
 
-                <label type="text" th:text="${prod.size} + ' - ' +${prod.price}+
-                ' zł Wybierz ilość '"></label>
-                <input type="number" th:field="*{quantity}"/>
+<!--            <input type="checkbox" th:name="|clientList[${stat.index}].clientID|"-->
+<!--                       th:value="${currentClient.getClientID()}" th:checked="${currentClient.selected}" />-->
 
-<!--                <input name="productId" type="hidden" th:field="*{productId}" th:value="${prod.id}">-->
+            <input type="number" th:field="*{items[__${stat.index}__].quantity}" />
+            <input type="hidden" th:field="*{items[__${stat.index}__].productId}" />
+
+<!--            <input type="number" name="quantity" th:value="${item.quantity}"/>-->
+<!--            <input type="hidden" name="productId" th:value="${item.productId}"/>-->
         </ul>
-        </span>
-    </ul>
-    <input type="submit" value="Zamów">
+
+<!--        <ul th:each="pizza : ${pizzaList}">-->
+<!--            <label type="text" th:text="${pizza}"></label>-->
+
+<!--            <span th:each="prod : ${pizzaDetails}">-->
+<!--            <ul th:if="${prod.product}==${pizza}">-->
+
+<!--                <label type="text" th:text="${prod.size} + ' - ' +${prod.price}+' zł Wybierz ilość '"></label>-->
+<!--                <input type="number" th:field="*{quantity}"/>-->
+<!--                Product id:<span th:text="${prod.id}"></span>-->
+
+<!--                <input name="productId" type="hidden" th:value="${prod.id}">-->
+<!--            </ul>-->
+<!--        </span>-->
+<!--        </ul>-->
+        <input type="submit" value="Zamów">
     </form>
 </div>
 </body>
