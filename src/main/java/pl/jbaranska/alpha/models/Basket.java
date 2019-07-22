@@ -9,9 +9,14 @@ import pl.jbaranska.alpha.entity.Item;
 
 import java.util.List;
 
-@Getter
 @Setter
 @ToString
-public class Cart {
-    private List<Item> itemList = Lists.newArrayList();
+public class Basket {
+
+    private List<ItemForm> itemList = Lists.newArrayList();
+
+    public List<ItemForm> getBasketItems() {
+        return itemList;
+    }
 }
+

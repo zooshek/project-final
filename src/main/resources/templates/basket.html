@@ -6,6 +6,11 @@
 </head>
 <body>
 <h3>Koszyk</h3>
-
+<ul th:each="item : ${basket}">
+    <li th:text="${item.getId()}"></li>
+    <li th:text="${item.getPrice()}"></li>
+    <li th:text="${item.getQuantity()}"></li>
+</ul>
+<div><a th:href="@{/menu/pizza}">Dodaj nowy product</a></div>
 </body>
 </html>
