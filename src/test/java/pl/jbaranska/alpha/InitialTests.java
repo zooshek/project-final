@@ -8,17 +8,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.jbaranska.alpha.entity.Category;
+import pl.jbaranska.alpha.entity.Item;
 import pl.jbaranska.alpha.entity.Role;
 import pl.jbaranska.alpha.entity.User;
+import pl.jbaranska.alpha.models.Cart;
 import pl.jbaranska.alpha.models.UserFormRegistration;
 import pl.jbaranska.alpha.repositories.CategoryRepository;
 import pl.jbaranska.alpha.repositories.ProductRepository;
 import pl.jbaranska.alpha.repositories.RoleRepository;
 import pl.jbaranska.alpha.repositories.UserRepository;
+import pl.jbaranska.alpha.services.OrderServices;
 import pl.jbaranska.alpha.services.RoleServices;
 
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
@@ -41,6 +46,8 @@ public class InitialTests {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    OrderServices orderServices;
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -73,6 +80,32 @@ public class InitialTests {
     public void selectProductsByName()
     {
         System.out.println(productRepository.findProductsByProduct("Parma"));
+    }
+
+    @Test
+    public void addToCart(){
+        Cart cart = new Cart();
+
+        Item a = new Item();
+        a.setQuantity(1);
+        a.setPrice(10.0);
+        a.setIdProduct(3);
+        List<Item> items = cart.getItemList();
+        Optional<Item> first = items.stream().filter(p -> p.getIdProduct().equals(a.getIdProduct())).findFirst();
+
+        if(first.isPresent())
+        {
+            first.get().setQuantity(first.get().getQuantity() + 1 );
+        }
+        else{
+            Item item = new Item();
+            item.setIdProduct(a.getIdProduct());
+            item.setPrice(a.getPrice());
+            item.setQuantity(a.getQuantity());
+            items.add( item);
+        }
+
+        System.out.println(cart.getItemList());
     }
 
 }

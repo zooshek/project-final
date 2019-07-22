@@ -45,7 +45,7 @@ public class RegisterController {
         try {
             userServices.registerUser(registerForm);
         } catch (EmailAlreadyExistsException e) {
-            bindingResult.rejectValue("email", "email-duplicate", "duplikat emaila");
+            bindingResult.rejectValue("email", "email-duplicate", "Podany email istnieje już w bazie");
             return "registerForm";
         }
 

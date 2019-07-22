@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @ToString
 public class SelectedWraper {
+    /*
 
     private List<SelectedItems> selectedItemsList ;
 
@@ -18,4 +19,6 @@ public class SelectedWraper {
     public SelectedWraper(List<SelectedItems> selectedItemsList) {
         this.selectedItemsList = selectedItemsList;
     }
+
+     */
 }
