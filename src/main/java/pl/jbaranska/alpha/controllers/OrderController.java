@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.jbaranska.alpha.entity.Item;
 import pl.jbaranska.alpha.entity.Order;
 import pl.jbaranska.alpha.entity.User;
@@ -35,29 +36,33 @@ public class OrderController {
     }
 
     @GetMapping("/order")
-    public String preparationOrder( Model model){
-        List<ItemForm> linesOrder =basketServices.getBasket();
+    public String preparationOrder(Model model, RedirectAttributes redirectAttributes) {
+        List<ItemForm> linesOrder = basketServices.getBasket();
+        if (!linesOrder.isEmpty()) {
+            Order order = new Order();
+            order.setUser(userServices.getUser().get());
+            order.setOrderDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
+            order.setTotalPrice(basketServices.getTotalPrice());
+            System.out.println(order);
+            List<Item> items = new ArrayList<>();
 
-        Order order = new Order();
-        order.setUser(userServices.getUser().get());
-        order.setOrderDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
-        order.setTotalPrice(basketServices.getTotalPrice());
-        System.out.println(order);
-        List<Item> items = new ArrayList<>();
+            for (ItemForm lineOrder : linesOrder) {
+                Item item = new Item();
+                item.setIdProduct(lineOrder.getProductId());
+                item.setOrder(order);
+                item.setPrice(lineOrder.getProduct().getPrice());
+                item.setQuantity(lineOrder.getQuantity());
+                items.add(item);
+                System.out.println(item);
+            }
+            Order newOrder = orderServices.submitOrder(order, items);
+            model.addAttribute("order", newOrder);
+            return "orderForm";
+        } else return "redirect:/orders";
+    }
 
-        for (ItemForm lineOrder: linesOrder) {
-            Item item = new Item();
-            item.setIdProduct(lineOrder.getProductId());
-            item.setOrder(order);
-            item.setPrice(lineOrder.getProduct().getPrice());
-            item.setQuantity(lineOrder.getQuantity());
-          items.add(item);
-            System.out.println(item);
-        }
-        orderServices.submitOrder(order,items);
-      //  model.addAttribute("basket", basketServices.getBasket());
-      //  model.addAttribute("totalPrice", basketServices.getTotalPrice());
-      //  model.addAttribute("user", userServices.getUser());
-        return "orderForm";
+    @GetMapping("/orders")
+    public String showOrders(){
+        return "orders";
     }
 }

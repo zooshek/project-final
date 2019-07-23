@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order</title>
 </head>
 <body>
 <h3>Twoje zamówienie</h3>
-<ul>
-
-</ul>
+<div th:text="'Zamówienie nr: '+${order.getId()}"></div>
+<div th:text="'Kwota do zapłaty: '+${order.getTotalPrice()}"></div>
+<div th:text="'Data zamówienia: '+${order.getOrderDate()}"></div>
 </body>
 </html>

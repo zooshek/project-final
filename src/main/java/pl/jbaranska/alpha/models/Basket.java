@@ -18,5 +18,10 @@ public class Basket {
     public List<ItemForm> getBasketItems() {
         return itemList;
     }
+
+    public boolean isBasketEmpty()
+    {
+        return this.itemList.isEmpty();
+    }
 }
 

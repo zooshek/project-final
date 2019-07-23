@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -31,9 +32,18 @@ public class OrderServices
     }
 
     @Transactional
-    public void submitOrder(Order order, List<Item> items){
-        orderRepository.save(order);
+    public Order submitOrder(Order order, List<Item> items){
+        Order o = orderRepository.save(order);
         itemRepository.saveAll(items);
+        return o;
+    }
+
+    public List<Order> getUserOrders(User user)
+    {
+        return orderRepository.findAllByUser(user);
+    }
+    public Optional<Order> getOrder(Order order){
+        return orderRepository.findOrderById(order.getId());
     }
 
 }
