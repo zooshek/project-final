@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginProcessingUrl("/loginBySpring")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/order")
                 .failureUrl("/login?status=error")
                 .and()
                 .logout()

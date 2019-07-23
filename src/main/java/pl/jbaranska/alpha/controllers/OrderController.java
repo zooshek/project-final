@@ -10,20 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.jbaranska.alpha.entity.Item;
 import pl.jbaranska.alpha.models.ItemForm;
 import pl.jbaranska.alpha.services.BasketServices;
+import pl.jbaranska.alpha.services.OrderServices;
 import pl.jbaranska.alpha.services.ProductServices;
+import pl.jbaranska.alpha.services.UserServices;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("/menu")
 @Controller
 public class OrderController {
     private ProductServices productServices;
     private BasketServices basketServices;
+    private OrderServices orderServices;
+    private UserServices userServices;
 
-    public OrderController(ProductServices productServices, BasketServices basketServices) {
+    public OrderController(ProductServices productServices, BasketServices basketServices, OrderServices orderServices, UserServices userServices) {
         this.productServices = productServices;
         this.basketServices = basketServices;
+        this.orderServices = orderServices;
+        this.userServices = userServices;
     }
 
+    @GetMapping("/order")
+    public String preparationOrder(Model model){
+        model.addAttribute("basket", basketServices.getBasket());
+        model.addAttribute("totalPrice", basketServices.getTotalPrice());
+        model.addAttribute("user", userServices.getUser());
+        return "orderForm";
+    }
 }

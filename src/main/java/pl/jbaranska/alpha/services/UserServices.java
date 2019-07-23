@@ -1,5 +1,9 @@
 package pl.jbaranska.alpha.services;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +31,38 @@ public class UserServices {
         this.roleRepository = roleRepository;
     }
 
+    public boolean isUser()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream()
+        .anyMatch(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ROLE_USER"))){
+            return true;
+        }
+        return false;
+    }
+
+    public String getLoggedUserEmail()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken){
+            return null;
+        }
+        return authentication.getName();
+    }
+    public Optional<User> getUser()
+    {
+        return userRepository.findFirstByEmail(getLoggedUserEmail());
+    }
+
+    public boolean isAdmin()
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream()
+                .anyMatch(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ROLE_ADMIN"))){
+            return true;
+        }
+        return false;
+    }
     @Transactional(rollbackFor = {EmailAlreadyExistsException.class})
     public void registerUser(UserFormRegistration userFormRegistration) throws EmailAlreadyExistsException {
 
@@ -50,6 +86,5 @@ public class UserServices {
         user.addRole(defaultRole);
 
         userRepository.save(user);
-
     }
 }

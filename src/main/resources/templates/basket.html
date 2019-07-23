@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>Koszyk</h3>
+<div></div>
 <ul th:each="item : ${basket}">
     <li th:text="${item.getProduct().product}+ ' '+${item.getProduct().size} + ' cena: '+ ${item.getProduct().price} + ' ' + ${item.getQuantity()} + ' szt'"></li>
 </ul>

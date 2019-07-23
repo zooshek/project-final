@@ -13,6 +13,7 @@ import pl.jbaranska.alpha.models.MenuForm;
 import pl.jbaranska.alpha.services.BasketServices;
 import pl.jbaranska.alpha.services.CategoryServices;
 import pl.jbaranska.alpha.services.ProductServices;
+import pl.jbaranska.alpha.services.UserServices;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,7 +30,6 @@ public class BasketController {
         this.productServices = productServices;
         this.categoryServices = categoryServices;
     }
-
 
     @GetMapping("menu/{category}")
     public String selectPizza(@PathVariable String category, Model model){
