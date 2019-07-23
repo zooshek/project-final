@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.jbaranska.alpha.entity.Item;
+import pl.jbaranska.alpha.entity.Order;
+import pl.jbaranska.alpha.entity.User;
 import pl.jbaranska.alpha.models.ItemForm;
 import pl.jbaranska.alpha.services.BasketServices;
 import pl.jbaranska.alpha.services.OrderServices;
@@ -15,27 +17,47 @@ import pl.jbaranska.alpha.services.ProductServices;
 import pl.jbaranska.alpha.services.UserServices;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
 public class OrderController {
-    private ProductServices productServices;
     private BasketServices basketServices;
     private OrderServices orderServices;
     private UserServices userServices;
 
-    public OrderController(ProductServices productServices, BasketServices basketServices, OrderServices orderServices, UserServices userServices) {
-        this.productServices = productServices;
+    public OrderController(BasketServices basketServices, OrderServices orderServices, UserServices userServices) {
         this.basketServices = basketServices;
         this.orderServices = orderServices;
         this.userServices = userServices;
     }
 
     @GetMapping("/order")
-    public String preparationOrder(Model model){
-        model.addAttribute("basket", basketServices.getBasket());
-        model.addAttribute("totalPrice", basketServices.getTotalPrice());
-        model.addAttribute("user", userServices.getUser());
+    public String preparationOrder( Model model){
+        List<ItemForm> linesOrder =basketServices.getBasket();
+
+        Order order = new Order();
+        order.setUser(userServices.getUser().get());
+        order.setOrderDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
+        order.setTotalPrice(basketServices.getTotalPrice());
+        System.out.println(order);
+        List<Item> items = new ArrayList<>();
+
+        for (ItemForm lineOrder: linesOrder) {
+            Item item = new Item();
+            item.setIdProduct(lineOrder.getProductId());
+            item.setOrder(order);
+            item.setPrice(lineOrder.getProduct().getPrice());
+            item.setQuantity(lineOrder.getQuantity());
+          items.add(item);
+            System.out.println(item);
+        }
+        orderServices.submitOrder(order,items);
+      //  model.addAttribute("basket", basketServices.getBasket());
+      //  model.addAttribute("totalPrice", basketServices.getTotalPrice());
+      //  model.addAttribute("user", userServices.getUser());
         return "orderForm";
     }
 }
