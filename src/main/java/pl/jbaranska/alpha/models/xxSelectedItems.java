@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class SelectedItems {
+public class xxSelectedItems {
     /*
     private Integer productId;
     @Min(value = 0, message = "Nieprawidłowa liczba")

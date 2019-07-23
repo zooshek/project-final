@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class SelectedWraper {
+public class xxSelectedWraper {
     /*
 
     private List<SelectedItems> selectedItemsList ;

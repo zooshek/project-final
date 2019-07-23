@@ -14,12 +14,15 @@ public class CategoryServices {
     private CategoryRepository categoryRepository;
 
     public CategoryServices(CategoryRepository categoryRepository) {
+
         this.categoryRepository = categoryRepository;
     }
+
     public List<Category> showCategoryList()
     {
         return categoryRepository.findAll();
     }
+
 @Transactional
     public void addCategory(CategoryForm categoryForm)
     {

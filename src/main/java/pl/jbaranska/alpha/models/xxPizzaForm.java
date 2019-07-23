@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PizzaForm {
+public class xxPizzaForm {
 
     private List<ItemForm> items = new ArrayList<>();
 

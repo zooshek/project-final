@@ -38,7 +38,7 @@ public class ProductServices {
             }
         }
     }
-
+/*
     public List<String> getPizzaList(){
 
         Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
@@ -49,9 +49,8 @@ public class ProductServices {
         Category category = categoryRepository.findByCategory(categoryName).get();
         return productRepository.findProductsByCategoryId(category.getId());
     }
-    public List<Product> showAllProducts(){
-        return productRepository.findAll();
-    }
+    */
+   // public List<Product> showAllProducts(){return productRepository.findAll();}
 
     public List<Product> showProductsInCategory(Integer categoryId){
         return productRepository.findProductsByCategoryId(categoryId);
@@ -60,8 +59,9 @@ public class ProductServices {
         Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
         return productRepository.findProductsByCategoryId(categoryPizza.getId());
     }
-    public List<Product> getProductsByName(String productName)
+    public List<Product> getProductsByCategoryName(String categoryName)
     {
-        return productRepository.findProductsByProduct(productName);
+        Integer categoryId = categoryRepository.findByCategory(categoryName).get().getId();
+        return productRepository.findProductsByCategoryId(categoryId);
     }
 }

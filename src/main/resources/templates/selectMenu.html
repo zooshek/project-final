@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Wybierz z menu</h1>
+<div>
+    <form method="post" th:action="@{/menu/{category}}" th:object="${menuForm}">
+
+        <ul th:each="item, stat : ${menuForm.items}">
+            <span th:text="${item.product.product}"></span>
+            <span th:text="${item.product.size}"></span>
+            <span th:text="${item.product.price}"></span>
+            <input th:name="quantity" type="number" th:field="*{items[__${stat.index}__].quantity}" th:errorClass="error" />
+            <span th:errors="*{items[__${stat.index}__].quantity}"></span>
+            <input type="hidden" th:field="*{items[__${stat.index}__].productId}" />
+            <input type="hidden" th:field="*{items[__${stat.index}__].product}" />
+        </ul>
+
+        <input type="submit" value="Dodaj do koszyka">
+    </form>
+</div>
+</body>
+</html>

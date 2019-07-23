@@ -37,6 +37,21 @@ public class BasketServices {
 
     }
 
+    public Double getTotalPrice(){
+        return this.basket.getBasketItems()
+                .stream()
+                .map(a -> a.getQuantity()*a.getProduct().getPrice())
+                .mapToDouble(Double::doubleValue).sum();
+    }
+    /*
+    public Double getTotalPrice()
+    {
+        return  this.basket.getBasketItems()
+                .stream()
+                .map(p -> p.getProduct().getPrice())
+                .mapToDouble(Double::doubleValue).sum();
+    }
+*/
     public List<ItemForm> getBasket()
     {
         return basket.getBasketItems();

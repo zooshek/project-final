@@ -16,7 +16,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query(value = "SELECT distinct PRODUCT_NAME FROM PRODUCTS WHERE CATEGORY_ID = :categoryId", nativeQuery = true)
     List<String> selectDistinctName (@Param("categoryId") Integer categoryId);
 
-    List<Product> findProductsByProduct(String productName);
 
     //@Query(value = "SELECT distinct PRODUCT_NAME FROM PRODUCTS WHERE CATEGORY_ID = :categoryId", nativeQuery = true)
     //List<String> selectDistinctName (@Param("categoryId") Integer categoryId);

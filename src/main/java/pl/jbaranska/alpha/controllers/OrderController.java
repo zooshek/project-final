@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.jbaranska.alpha.entity.Item;
-import pl.jbaranska.alpha.models.PizzaForm;
 import pl.jbaranska.alpha.models.ItemForm;
 import pl.jbaranska.alpha.services.BasketServices;
 import pl.jbaranska.alpha.services.ProductServices;

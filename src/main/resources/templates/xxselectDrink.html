@@ -5,17 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Wybierz pizzę</h1>
+<h1>Wybierz napój</h1>
 <div>
-    <form method="post" th:action="@{/menu/pizza}" th:object="${pizzaForm}">
+    <form method="post" th:action="@{/menu/drink}" th:object="${drinkForm}">
 
-        <ul th:each="item, stat : ${pizzaForm.items}">
+        <ul th:each="item, stat : ${drinkForm.items}">
             <span th:text="${item.product.id}"></span>
             <span th:text="${item.product.product}"></span>
             <span th:text="${item.product.size}"></span>
             <span th:text="${item.product.price}"></span>
             <input type="number" th:field="*{items[__${stat.index}__].quantity}" />
-        <!---    <span th:errors="${item.quantity}"></span> --->
+            <!---    <span th:errors="${item.quantity}"></span> --->
             <input type="hidden" th:field="*{items[__${stat.index}__].productId}" />
             <input type="hidden" th:field="*{items[__${stat.index}__].product}" />
         </ul>

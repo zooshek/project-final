@@ -7,10 +7,12 @@
 <body>
 <h3>Koszyk</h3>
 <ul th:each="item : ${basket}">
-    <li th:text="${item.getId()}"></li>
-    <li th:text="${item.getPrice()}"></li>
-    <li th:text="${item.getQuantity()}"></li>
+    <li th:text="${item.getProduct().product}+ ' '+${item.getProduct().size} + ' cena: '+ ${item.getProduct().price} + ' ' + ${item.getQuantity()} + ' szt'"></li>
 </ul>
-<div><a th:href="@{/menu/pizza}">Dodaj nowy product</a></div>
+<h4 th:text=" 'Wartość całkowita: ' +${totalPrice} + ' zł'"></h4>
+<div></div>
+<ul th:each="category : ${categories}">
+    <li th:text="${category.category}"> </li> <a th:href="@{/menu/{category}(category=${category.category})}" th:value="${category.category}">Link</a>
+</ul>
 </body>
 </html>

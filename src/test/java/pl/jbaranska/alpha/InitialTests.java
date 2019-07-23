@@ -69,11 +69,5 @@ public class InitialTests {
         System.out.println(productRepository.selectDistinctName(categoryPizza.getId()));
     }
 
-    @Test
-    public void selectProductsByName()
-    {
-        System.out.println(productRepository.findProductsByProduct("Parma"));
-    }
-
 
 }
