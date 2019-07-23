@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.jbaranska.alpha.entity.User;
 import pl.jbaranska.alpha.models.ItemForm;
 import pl.jbaranska.alpha.models.MenuForm;
 import pl.jbaranska.alpha.services.BasketServices;
@@ -24,11 +25,13 @@ public class BasketController {
     private BasketServices basketServices;
     private ProductServices productServices;
     private CategoryServices categoryServices;
+    private UserServices userServices;
 
-    public BasketController(BasketServices basketServices, ProductServices productServices, CategoryServices categoryServices) {
+    public BasketController(BasketServices basketServices, ProductServices productServices, CategoryServices categoryServices, UserServices userServices) {
         this.basketServices = basketServices;
         this.productServices = productServices;
         this.categoryServices = categoryServices;
+        this.userServices = userServices;
     }
 
     @GetMapping("menu/{category}")
@@ -67,6 +70,7 @@ public class BasketController {
         model.addAttribute("categories", categoryServices.showCategoryList());
         model.addAttribute("totalPrice", basketServices.getTotalPrice());
         model.addAttribute("basket", basketServices.getBasket());
+        model.addAttribute("user",userServices.getUser().orElse(new User()) );
         return "basket";
     }
 }

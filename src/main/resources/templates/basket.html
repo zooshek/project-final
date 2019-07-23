@@ -6,7 +6,8 @@
 </head>
 <body>
 <h3>Koszyk</h3>
-<div></div>
+
+<div th:text="${user.name != null} ? 'Dane użytkownika: ' +${user.name} : ''"></div>
 <ul th:each="item : ${basket}">
     <li th:text="${item.getProduct().product}+ ' '+${item.getProduct().size} + ' cena: '+ ${item.getProduct().price} + ' ' + ${item.getQuantity()} + ' szt'"></li>
 </ul>
@@ -15,5 +16,11 @@
 <ul th:each="category : ${categories}">
     <li th:text="${category.category}"> </li> <a th:href="@{/menu/{category}(category=${category.category})}" th:value="${category.category}">Link</a>
 </ul>
+<div th:with="expr_result = ${totalPrice>0}">
+    <div th:if="${expr_result}">
+        <button><a th:href="@{/order}">Zamów</a></button>
+    </div>
+</div>
+
 </body>
 </html>
