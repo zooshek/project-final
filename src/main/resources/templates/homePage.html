@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Strona startowa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:replace="parts/header :: header"></div>
 <div class="jumbotron text-center">
     <h1>Najsmaczniejsza pizza we wsi</h1>
 </div>
@@ -16,16 +17,10 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            <h3><a th:href="@{/menu/pizza}">Pizza</a></h3>
+            <h3 th:each="category : ${cetegories}">
+                <a class="col-sm-4" th:href="@{/menu/{category} (category=${category.category})}"><span th:text="${category.category}"></span></a>
             <p>Zdjęcie</p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Dodatki</h3>
-            <p>Zdjęcie</p>
-        </div>
-        <div class="col-sm-4">
-            <h3>Napoje</h3>
-            <p>Zdjęcie</p>
+            </h3>
         </div>
     </div>
 </div>

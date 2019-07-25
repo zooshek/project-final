@@ -40,10 +40,15 @@ public class OrderServices
 
     public List<Order> getUserOrders(User user)
     {
-        return orderRepository.findAllByUser(user);
+        return orderRepository.findByUser(user);
     }
+
     public Optional<Order> getOrder(Order order){
         return orderRepository.findOrderById(order.getId());
+    }
+
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 
 }

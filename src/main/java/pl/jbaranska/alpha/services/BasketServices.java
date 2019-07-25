@@ -57,4 +57,9 @@ public class BasketServices {
         return basket.getBasketItems();
     }
 
+    public void clearBasket()
+    {
+        this.basket.clearBasket();
+    }
+
 }

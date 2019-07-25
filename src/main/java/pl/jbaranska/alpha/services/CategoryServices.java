@@ -6,6 +6,7 @@ import pl.jbaranska.alpha.entity.Category;
 import pl.jbaranska.alpha.models.CategoryForm;
 import pl.jbaranska.alpha.repositories.CategoryRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class CategoryServices {
     }
 
 @Transactional
-    public void addCategory(CategoryForm categoryForm)
+    public void addCategory(CategoryForm categoryForm) throws SQLException
     {
          categoryRepository.findByCategory(categoryForm.getCategoryName())
          .orElseGet(() -> categoryRepository.save(new Category(categoryForm.getCategoryName())));

@@ -5,6 +5,7 @@
     <title>Koszyk</title>
 </head>
 <body>
+<div th:replace="parts/header :: header"></div>
 <h3>Koszyk</h3>
 
 <div th:text="${user.name != null} ? 'Dane użytkownika: ' +${user.name} : ''"></div>

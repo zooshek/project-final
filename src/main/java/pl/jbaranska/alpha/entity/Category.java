@@ -18,7 +18,7 @@ public class Category {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "CATEGORY_NAME")
+    @Column(name = "CATEGORY_NAME", unique = true)
     private String category;
 
     @OneToMany

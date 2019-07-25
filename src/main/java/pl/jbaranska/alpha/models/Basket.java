@@ -23,5 +23,9 @@ public class Basket {
     {
         return this.itemList.isEmpty();
     }
+
+    public void clearBasket(){
+        this.itemList.removeAll(itemList);
+    }
 }
 

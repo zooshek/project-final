@@ -2,9 +2,10 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Menu</title>
 </head>
 <body>
+<div th:replace="parts/header :: header"></div>
 <h1>Wybierz z menu</h1>
 <div>
     <form method="post" th:action="@{/menu/{category}}" th:object="${menuForm}">

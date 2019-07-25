@@ -7,6 +7,7 @@ import pl.jbaranska.alpha.models.ProductForm;
 import pl.jbaranska.alpha.repositories.CategoryRepository;
 import pl.jbaranska.alpha.repositories.ProductRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class ProductServices {
         this.categoryRepository = categoryRepository;
     }
 
-    public void saveProduct (ProductForm productForm, Integer categoryId){
+    public void saveProduct (ProductForm productForm, Integer categoryId) throws SQLException {
         {
             Product product = new Product();
             if(categoryRepository.findById(categoryId).isPresent())
@@ -38,20 +39,6 @@ public class ProductServices {
             }
         }
     }
-/*
-    public List<String> getPizzaList(){
-
-        Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
-        return   productRepository.selectDistinctName(categoryPizza.getId());
-
-    }
-    public List<Product> showProductsInCategory(String categoryName){
-        Category category = categoryRepository.findByCategory(categoryName).get();
-        return productRepository.findProductsByCategoryId(category.getId());
-    }
-    */
-   // public List<Product> showAllProducts(){return productRepository.findAll();}
-
     public List<Product> showProductsInCategory(Integer categoryId){
         return productRepository.findProductsByCategoryId(categoryId);
     }

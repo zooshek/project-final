@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Zamówienia</title>
 </head>
 <body>
+<div th:replace="parts/header :: header"></div>
+<h3>Twoje zamówienia</h3>
+<div th:with="expr_result = ${orders.size()>0}">
+    <div th:if="${expr_result}">
+        <ul th:each="order : ${orders}">
+            <li th:text="'Zamówienie nr: '+${order.getId()} + ' z dnia '+${order.getOrderDate()}+ 'za kwotę: '+${order.getTotalPrice()}"></li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>

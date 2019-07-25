@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<div th:fragment="header-libs">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</div>
 </head>
 <body>
+<div th:fragment="header">
+    <span th:if="${@userServices.isUser()}">
+        <span th:text="'Witaj: ' + ${@userServices.getUser().get().getName()} +' - '"></span>
+        <a th:href="@{/basket}">  Koszyk  </a>
+        <a th:href="@{/logout}">  Wyloguj   </a>
+    </span>
+    <span th:if="${@userServices.isAdmin()}">
+        <a th:href="@{/admin/categories}">Panel administratora</a> <a th:href="@{/logout}">Wyloguj</a> </span>
+    <span th:if="${!@userServices.isAdmin()} and ${!@userServices.isUser()}">
+        <a th:href="@{/login}">Zaloguj</a></span>
 
+</div>
 </body>
 </html>

@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/","/order/**","/orders/**").hasRole("USER")
+                .antMatchers("/","/**","/admin/**","/orders/**").hasRole("ADMIN")
+                .antMatchers("/","/order/*","/orders/*").hasRole("USER")
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .csrf().disable()
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginProcessingUrl("/loginBySpring")
-                .defaultSuccessUrl("/basket")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?status=error")
                 .and()
                 .logout()

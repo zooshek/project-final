@@ -38,9 +38,18 @@ public class OrderController {
     @GetMapping("/order")
     public String preparationOrder(Model model, RedirectAttributes redirectAttributes) {
         List<ItemForm> linesOrder = basketServices.getBasket();
+        if(userServices.isAdmin())
+        {
+            throw new RuntimeException("Administrator nie może składać zamówień");
+        }
         if (!linesOrder.isEmpty()) {
             Order order = new Order();
-            order.setUser(userServices.getUser().get());
+            if (!userServices.getUser().isPresent())
+            {
+                return "redirect:/login";
+            } else {
+                order.setUser(userServices.getUser().get());
+            }
             order.setOrderDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
             order.setTotalPrice(basketServices.getTotalPrice());
             System.out.println(order);
@@ -56,13 +65,30 @@ public class OrderController {
                 System.out.println(item);
             }
             Order newOrder = orderServices.submitOrder(order, items);
+            basketServices.clearBasket();
             model.addAttribute("order", newOrder);
             return "orderForm";
         } else return "redirect:/orders";
     }
 
     @GetMapping("/orders")
-    public String showOrders(){
-        return "orders";
+    public String showOrders(Model model,RedirectAttributes redirectAttributes){
+
+        if (userServices.isAdmin())
+        {
+            model.addAttribute("orders", orderServices.getAllOrders());
+            return "orders";
+        }
+
+        if(userServices.getUser().isPresent()) {
+
+            model.addAttribute("orders", orderServices.getUserOrders(userServices.getUser().get()));
+            return "orders";
+        }
+        else{
+            model.addAttribute("orders",new ArrayList<>());
+            return "orders";
+        }
+
     }
 }
