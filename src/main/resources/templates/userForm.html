@@ -2,12 +2,30 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Aktualizacja danych</title>
 </head>
 <body>
-<form method="post" th:action="@{/admin/users}" th:object="${userForm}">
 
-</form>
-
+<div th:replace="parts/header :: header"></div>
+    <span th:text="${userForm.name}"> </span>
+    <br>
+    <span th:text="${userForm.surname}"> </span>
+    <br>
+    <span th:text="${userForm.street}"> </span>
+    <br>
+    <span th:text="${userForm.city}"> </span>
+    <br>
+    <span th:text="${userForm.zip}"> </span>
+    <br>
+    <span th:text="${userForm.phone}"> </span>
+<div>
+     <span th:if="${@userServices.isUser()}">
+    <button><a th:href="@{/user/edit/{id}(id=${user.id})}">Edytuj dane</a></button>
+         <button><a th:href="@{/order}">Zamów</a></button>
+     </span>
+    <span th:if="${!@userServices.isAdmin()} and ${!@userServices.isUser()}">
+    <button><a th:href="@{/login}">Zaloguj</a></button>
+    </span>
+</div>
 </body>
 </html>

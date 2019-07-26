@@ -42,10 +42,6 @@ public class ProductServices {
     public List<Product> showProductsInCategory(Integer categoryId){
         return productRepository.findProductsByCategoryId(categoryId);
     }
-    public List<Product> showProductPizza(){
-        Category categoryPizza = categoryRepository.findByCategory(CATEGORY_PIZZA).get();
-        return productRepository.findProductsByCategoryId(categoryPizza.getId());
-    }
     public List<Product> getProductsByCategoryName(String categoryName)
     {
         Integer categoryId = categoryRepository.findByCategory(categoryName).get().getId();

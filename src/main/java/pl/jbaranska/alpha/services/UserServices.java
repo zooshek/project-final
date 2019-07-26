@@ -14,6 +14,7 @@ import pl.jbaranska.alpha.models.UserFormRegistration;
 import pl.jbaranska.alpha.repositories.RoleRepository;
 import pl.jbaranska.alpha.repositories.UserRepository;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -52,6 +53,16 @@ public class UserServices {
     public Optional<User> getUser()
     {
         return userRepository.findFirstByEmail(getLoggedUserEmail());
+    }
+
+    @Transactional
+    public void editUser(User user)throws SQLException {
+        userRepository.save(user);
+    }
+
+    public Optional<User> getUserById(Integer id)
+    {
+        return userRepository.findById(id);
     }
 
     public boolean isAdmin()

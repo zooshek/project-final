@@ -19,7 +19,13 @@
 </ul>
 <div th:with="expr_result = ${totalPrice>0}">
     <div th:if="${expr_result}">
-        <button><a th:href="@{/order}">Zamów</a></button>
+
+        <span th:if="${@userServices.isUser()}">
+    <button><a th:href="@{/user/{id}(id=${user.id})}">Zamów</a></button>
+    </span>
+        <span th:if="${!@userServices.isAdmin()} and ${!@userServices.isUser()}">
+    <button><a th:href="@{/login}">Zaloguj</a></button>
+    </span>
     </div>
 </div>
 

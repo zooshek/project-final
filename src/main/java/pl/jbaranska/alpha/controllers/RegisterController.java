@@ -50,7 +50,7 @@ public class RegisterController {
         }
 
         redirectAttributes.addFlashAttribute("msg", "Dzięki za rejestrację!");
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }

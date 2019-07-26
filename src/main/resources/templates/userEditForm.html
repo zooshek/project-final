@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktualizacja danych</title>
+</head>
+<body>
+<div th:replace="parts/header :: header"></div>
+
+<form method="post" th:action="@{/user/edit/{id}(id=${user.id})}" th:object="${userEditForm}">
+    Imię <input type="text" th:field="*{name}" th:errorClass="error">
+    <span th:errors="*{name}"></span>
+    <br>
+    Nazwisko <input  type="text" th:field="*{surname}" th:errorClass="error">
+    <span th:errors="*{surname}"></span>
+    <br>
+    Ulica <input  type="text" th:field="*{street}" th:errorClass="error">
+    <span th:errors="*{street}"></span>
+    <br>
+    Miasto <input  type="text" th:field="*{city}" th:errorClass="error">
+    <span th:errors="*{city}"></span>
+    <br>
+    Kod pocztowy <input  type="text" th:field="*{zip}" th:errorClass="error">
+    <span th:errors="*{zip}"></span>
+    <br>
+    Telefon <input  type="text" th:field="*{phone}" th:errorClass="error">
+    <span th:errors="*{phone}"></span>
+
+    <input type="submit" value="Aktualizuj"/>
+    </form>
+<!---
+<div>
+     <span th:if="${@userServices.isUser()}">
+    <button><a th:href="@{/user/{id}(id=${user.id})}">Zapisz dane</a></button>
+         <button><a th:href="@{/order}">Zamów</a></button>
+     </span>
+    <span th:if="${!@userServices.isAdmin()} and ${!@userServices.isUser()}">
+    <button><a th:href="@{/login}">Zaloguj</a></button>
+    </span>
+</div>
+--->
+</body>
+</html>
