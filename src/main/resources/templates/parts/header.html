@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:fragment="header-libs">
+    <style>
+    .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+    }
+    }
+    </style>
+    <link href="cover.css" rel="stylesheet">
+    <div th:fragment="header-libs">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 </div>
 </head>
-<body>
-<div th:fragment="header">
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" th:fragment="header">
     <span th:if="${@userServices.isUser()}">
-        <span th:text="'Witaj: ' + ${@userServices.getUser().get().getName()} +' - '"></span>
-        <a th:href="@{/basket}">  Koszyk  </a>
-        <a th:href="@{/logout}">  Wyloguj   </a>
+        <span th:text="'Użytkownik: ' + ${@userServices.getUser().get().getName()} +' - '"></span>
+        <a th:href="@{/basket}">   [Koszyk]   </a>
+        <a th:href="@{/logout}">   [Wyloguj]   </a>
     </span>
     <span th:if="${@userServices.isAdmin()}">
-        <a th:href="@{/admin/categories}">Panel administratora</a> <a th:href="@{/logout}">Wyloguj</a> </span>
+        <a th:href="@{/admin/categories}">Panel administratora</a> <a th:href="@{/logout}">   [Wyloguj]   </a> </span>
     <span th:if="${!@userServices.isAdmin()} and ${!@userServices.isUser()}">
-        <a th:href="@{/login}">Zaloguj</a></span>
+        <a th:href="@{/login}">   [Zaloguj]   </a></span>
 
 </div>
 </body>
